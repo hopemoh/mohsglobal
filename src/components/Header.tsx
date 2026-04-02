@@ -80,9 +80,9 @@ const Header = () => {
                 {link.label}
               </Link>
             ))}
-            <Button asChild className="mt-2">
-              <Link to="/contact" onClick={() => setMobileOpen(false)}>Request Quote</Link>
-            </Button>
+            <QuoteDialog>
+              <Button className="mt-2">Request Quote</Button>
+            </QuoteDialog>
           </nav>
         </div>
       )}
