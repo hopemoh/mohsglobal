@@ -61,7 +61,8 @@ const CmsSection = ({ config }: { config: CrudConfig }) => {
     });
 
     if (editRecord?.id) {
-      const { error } = await supabase.from(config.table).update(values).eq("id", editRecord.id);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { error } = await (supabase.from as any)(config.table).update(values).eq("id", editRecord.id);
       if (error) {
         toast({ title: "Error", description: error.message, variant: "destructive" });
         return;
@@ -70,7 +71,8 @@ const CmsSection = ({ config }: { config: CrudConfig }) => {
       if (config.sortable) {
         values.sort_order = records.length;
       }
-      const { error } = await supabase.from(config.table).insert(values);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { error } = await (supabase.from as any)(config.table).insert(values);
       if (error) {
         toast({ title: "Error", description: error.message, variant: "destructive" });
         return;
@@ -84,7 +86,8 @@ const CmsSection = ({ config }: { config: CrudConfig }) => {
 
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this?")) return;
-    const { error } = await supabase.from(config.table).delete().eq("id", id);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { error } = await (supabase.from as any)(config.table).delete().eq("id", id);
     if (error) {
       toast({ title: "Error", description: error.message, variant: "destructive" });
     } else {
