@@ -33,11 +33,12 @@ const CmsSection = ({ config }: { config: CrudConfig }) => {
   const { toast } = useToast();
 
   const fetchRecords = async () => {
-    const query = supabase.from(config.table).select("*");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let query = (supabase.from as any)(config.table).select("*");
     if (config.sortable) {
-      query.order("sort_order", { ascending: true });
+      query = query.order("sort_order", { ascending: true });
     } else {
-      query.order("created_at", { ascending: false });
+      query = query.order("created_at", { ascending: false });
     }
     const { data, error } = await query;
     if (error) {
