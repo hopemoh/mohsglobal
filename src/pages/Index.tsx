@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Factory, Truck, Shield, Star } from "lucide-react";
+import { PageMeta } from "@/hooks/usePageMeta";
 import heroImg from "@/assets/hero-mining.jpg";
 import limestoneImg from "@/assets/limestone.jpg";
 import dolomiteImg from "@/assets/dolomite.jpg";
@@ -29,8 +30,53 @@ const Index = () => {
   const { data: faqs } = useQuery({ queryKey: ["cms_faqs"], queryFn: fetchFaqs });
   const { data: cta } = useQuery({ queryKey: ["cms_cta"], queryFn: fetchCta });
 
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "GeoCore Minerals",
+    "description": "Premium mineral processing solutions specializing in limestone, dolomite, and lepidolite extraction and processing.",
+    "image": "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1a0029db-a55b-49f4-b929-e023376c0e3f/id-preview-0d494291--78eb7ae8-738c-4ea0-82bc-61659bc871b9.lovable.app-1775154371803.png",
+    "url": "https://geocoreminerals.com",
+    "telephone": "+1-234-567-890",
+    "email": "info@geocoreminerals.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "123 Industrial Avenue",
+      "addressLocality": "Mining District",
+      "addressRegion": "MD",
+      "postalCode": "12345",
+      "addressCountry": "US"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "09:00",
+        "closes": "13:00"
+      }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "127"
+    }
+  };
+
   return (
     <>
+      <PageMeta 
+        title="Home - Premium Limestone, Dolomite & Lepidolite Supplier"
+        description="GeoCore Minerals specializes in extraction and processing of limestone, dolomite, and lepidolite. Premium mineral supplier for construction, agriculture, and industrial applications since 2000."
+        keywords="limestone supplier, dolomite processing, lepidolite supplier, mineral processing, bulk minerals, mining"
+        path="/"
+        schema={schema}
+      />
       {/* Hero */}
       <section className="relative min-h-[85vh] flex items-center">
         <div className="absolute inset-0">

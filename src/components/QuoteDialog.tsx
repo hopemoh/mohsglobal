@@ -52,7 +52,7 @@ const QuoteDialog = ({ children }: QuoteDialogProps) => {
             </div>
             <div className="space-y-2">
               <Label htmlFor="q-phone">Phone</Label>
-              <Input id="q-phone" type="tel" placeholder="+1 (234) 567-890" maxLength={20} />
+              <Input id="q-phone" type="tel" placeholder="+2348086448751" maxLength={20} />
             </div>
           </div>
           <div className="grid sm:grid-cols-2 gap-4">

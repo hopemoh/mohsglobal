@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Factory, Truck, Settings, Beaker, Package, ArrowRight } from "lucide-react";
+import { PageMeta } from "@/hooks/usePageMeta";
 import processingImg from "@/assets/processing-plant.jpg";
 
 const services = [
@@ -36,8 +37,39 @@ const services = [
   },
 ];
 
-const Services = () => (
-  <>
+const Services = () => {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Mineral Processing & Supply Services",
+    "description": "Comprehensive mineral processing, bulk supply, logistics, and custom order services for limestone, dolomite, and lepidolite.",
+    "provider": {
+      "@type": "Organization",
+      "name": "GeoCore Minerals",
+      "url": "https://geocoreminerals.com"
+    },
+    "areaServed": "US",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Mineral Processing Services",
+      "itemListElement": services.map((s, idx) => ({
+        "@type": "Offer",
+        "position": idx + 1,
+        "name": s.title,
+        "description": s.desc
+      }))
+    }
+  };
+
+  return (
+    <>
+      <PageMeta 
+        title="Services"
+        description="GeoCore Minerals offers mineral processing, bulk supply, custom orders, quality testing, and flexible packaging solutions for limestone, dolomite, and lepidolite."
+        keywords="mineral processing, bulk supply, custom mineral orders, quality testing, logistics, packaging solutions"
+        path="/services"
+        schema={schema}
+      />
     <section className="py-16 md:py-20 bg-muted/50">
       <div className="container text-center">
         <h1 className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-4">Our Services</h1>
@@ -97,7 +129,8 @@ const Services = () => (
         </div>
       </div>
     </section>
-  </>
-);
+    </>
+  );
+};
 
 export default Services;

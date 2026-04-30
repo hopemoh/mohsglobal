@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
+import { PageMeta } from "@/hooks/usePageMeta";
 
 const posts = [
   {
@@ -52,9 +53,30 @@ const posts = [
   },
 ];
 
-const Blog = () => (
-  <>
-    <section className="py-16 md:py-20 bg-muted/50">
+const Blog = () => {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "GeoCore Minerals Blog - Insights & Resources",
+    "description": "Industry knowledge, mineral guides, and expert insights about limestone, dolomite, lepidolite, and sustainable mining practices.",
+    "url": "https://geocoreminerals.com/blog",
+    "publisher": {
+      "@type": "Organization",
+      "name": "GeoCore Minerals",
+      "url": "https://geocoreminerals.com"
+    }
+  };
+
+  return (
+    <>
+      <PageMeta 
+        title="Insights & Resources"
+        description="Read articles about mineral processing, limestone in construction, dolomite in agriculture, lepidolite battery technology, and sustainable mining practices."
+        keywords="mineral insights, industry guides, limestone articles, dolomite agriculture, lepidolite technology, sustainable mining"
+        path="/blog"
+        schema={schema}
+      />
+      <section className="py-16 md:py-20 bg-muted/50">
       <div className="container text-center">
         <h1 className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-4">Insights & Resources</h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -89,7 +111,8 @@ const Blog = () => (
         </div>
       </div>
     </section>
-  </>
-);
+    </>
+  );
+};
 
 export default Blog;

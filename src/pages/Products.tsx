@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { PageMeta } from "@/hooks/usePageMeta";
 import limestoneImg from "@/assets/limestone.jpg";
 import dolomiteImg from "@/assets/dolomite.jpg";
 import lepidoliteImg from "@/assets/lepidolite.jpg";
@@ -56,8 +57,35 @@ const products = [
   },
 ];
 
-const Products = () => (
-  <>
+const Products = () => {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Our Products - GeoCore Minerals",
+    "description": "Browse our premium mineral products including limestone, dolomite, and lepidolite. All available in multiple forms and custom specifications.",
+    "url": "https://geocoreminerals.com/products",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": products.map((p, idx) => ({
+        "@type": "Product",
+        "position": idx + 1,
+        "name": p.name,
+        "description": p.desc,
+        "url": `https://geocoreminerals.com/products#${p.slug}`,
+        "image": p.img,
+      }))
+    }
+  };
+
+  return (
+    <>
+      <PageMeta 
+        title="Products"
+        description="GeoCore Minerals offers premium limestone, dolomite, and lepidolite products. High-purity minerals in powder and lump forms with custom specifications available."
+        keywords="limestone powder, dolomite supplier, lepidolite powder, mineral products, bulk minerals, industrial minerals"
+        path="/products"
+        schema={schema}
+      />
     <section className="py-16 md:py-20 bg-muted/50">
       <div className="container text-center">
         <h1 className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-4">Our Products</h1>
@@ -130,6 +158,7 @@ const Products = () => (
       </div>
     </section>
   </>
-);
+  );
+};
 
 export default Products;

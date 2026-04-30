@@ -1,4 +1,5 @@
 import { Shield, Target, Eye, Award, Users, Clock } from "lucide-react";
+import { PageMeta } from "@/hooks/usePageMeta";
 import processingImg from "@/assets/processing-plant.jpg";
 import heroImg from "@/assets/hero-mining.jpg";
 
@@ -11,8 +12,31 @@ const values = [
   { icon: Eye, title: "Sustainability", desc: "Responsible mining practices with environmental rehabilitation and waste minimization." },
 ];
 
-const About = () => (
-  <>
+const About = () => {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "GeoCore Minerals",
+    "description": "GeoCore Minerals is a premium mineral processing company specializing in limestone, dolomite, and lepidolite extraction. Established in 2000, we serve construction, agriculture, and industrial sectors globally.",
+    "url": "https://geocoreminerals.com/about",
+    "logo": "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1a0029db-a55b-49f4-b929-e023376c0e3f/id-preview-0d494291--78eb7ae8-738c-4ea0-82bc-61659bc871b9.lovable.app-1775154371803.png",
+    "sameAs": [
+      "https://www.facebook.com/geocoreminerals",
+      "https://www.linkedin.com/company/geocoreminerals"
+    ],
+    "foundingDate": "2000",
+    "numberOfEmployees": "50-100"
+  };
+
+  return (
+    <>
+      <PageMeta 
+        title="About Us"
+        description="Learn about GeoCore Minerals - a premium mineral supplier with over 25 years of experience in limestone, dolomite, and lepidolite processing. ISO certified, sustainable practices."
+        keywords="about GeoCore Minerals, mineral supplier, limestone processing, dolomite extraction, lepidolite supplier, mining company history"
+        path="/about"
+        schema={schema}
+      />
     {/* Hero */}
     <section className="relative py-20 md:py-28">
       <div className="absolute inset-0">
@@ -94,6 +118,7 @@ const About = () => (
       </div>
     </section>
   </>
-);
+  );
+};
 
 export default About;
