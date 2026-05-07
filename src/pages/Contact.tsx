@@ -13,14 +13,14 @@ const Contact = () => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    "name": "Contact GeoCore Minerals",
-    "description": "Get in touch with GeoCore Minerals for quotes, product inquiries, and mineral supply needs.",
-    "url": "https://geocoreminerals.com/contact",
+    "name": "Contact Mohsglobal Resources",
+    "description": "Get in touch with Mohsglobal Resources for quotes, product inquiries, and mineral supply needs.",
+    "url": "https://mohsglobal.site/contact",
     "mainEntity": {
       "@type": "LocalBusiness",
-      "name": "GeoCore Minerals",
-      "telephone": "+1-234-567-890",
-      "email": "info@geocoreminerals.com",
+      "name": "Mohsglobal Resources",
+      "telephone": "+2348086448751",
+      "email": "inquiry@mohsglobal.site",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Km 8 freedom industrial way,",
@@ -68,8 +68,8 @@ const Contact = () => {
     <>
       <PageMeta 
         title="Contact Us"
-        description="Contact GeoCore Minerals for bulk mineral quotes, product information, and supply inquiries. We're available Mon-Fri 8-6, Sat 9-1."
-        keywords="contact GeoCore Minerals, bulk mineral quotes, mineral supplier contact, limestone dolomite lepidolite orders"
+        description="Contact Mohsglobal Resources for bulk mineral quotes, product information, and supply inquiries. We're available Mon-Fri 8-6, Sat 9-1."
+        keywords="contact Mohsglobal Resources, bulk mineral quotes, mineral supplier contact, limestone dolomite lepidolite orders"
         path="/contact"
         schema={schema}
       />
