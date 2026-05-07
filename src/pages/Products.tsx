@@ -61,9 +61,9 @@ const Products = () => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "Our Products - GeoCore Minerals",
+    "name": "Our Products - Mohsglobal Resources",
     "description": "Browse our premium mineral products including limestone, dolomite, and lepidolite. All available in multiple forms and custom specifications.",
-    "url": "https://geocoreminerals.com/products",
+    "url": "https://nohsglobal.site/products",
     "mainEntity": {
       "@type": "ItemList",
       "itemListElement": products.map((p, idx) => ({
@@ -71,7 +71,7 @@ const Products = () => {
         "position": idx + 1,
         "name": p.name,
         "description": p.desc,
-        "url": `https://geocoreminerals.com/products#${p.slug}`,
+        "url": `https://mohsglobal.site/products#${p.slug}`,
         "image": p.img,
       }))
     }
@@ -81,7 +81,7 @@ const Products = () => {
     <>
       <PageMeta 
         title="Products"
-        description="GeoCore Minerals offers premium limestone, dolomite, and lepidolite products. High-purity minerals in powder and lump forms with custom specifications available."
+        description="Mohsglobal Resources offers premium limestone, dolomite, and lepidolite products. High-purity minerals in powder and lump forms with custom specifications available."
         keywords="limestone powder, dolomite supplier, lepidolite powder, mineral products, bulk minerals, industrial minerals"
         path="/products"
         schema={schema}
