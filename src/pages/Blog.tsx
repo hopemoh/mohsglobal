@@ -30,7 +30,7 @@ const posts = [
   {
     slug: "mineral-processing-quality",
     title: "Quality Control in Mineral Processing: Our Approach",
-    excerpt: "A behind-the-scenes look at how GeoCore Minerals maintains 99.5% purity standards through advanced testing and processing techniques.",
+    excerpt: "A behind-the-scenes look at how Mohsglobal Resources maintains 99.5% purity standards through advanced testing and processing techniques.",
     date: "January 20, 2026",
     readTime: "4 min read",
     category: "Company",
@@ -57,13 +57,13 @@ const Blog = () => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    "name": "GeoCore Minerals Blog - Insights & Resources",
+    "name": Mohsglobal Resources Blog - Insights & Resources",
     "description": "Industry knowledge, mineral guides, and expert insights about limestone, dolomite, lepidolite, and sustainable mining practices.",
-    "url": "https://geocoreminerals.com/blog",
+    "url": "https://mohsglobal.site/blog",
     "publisher": {
       "@type": "Organization",
-      "name": "GeoCore Minerals",
-      "url": "https://geocoreminerals.com"
+      "name": "Mohsglobal Resources",
+      "url": "https://Mohsglobal.site"
     }
   };
 
@@ -80,7 +80,7 @@ const Blog = () => {
       <div className="container text-center">
         <h1 className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-4">Insights & Resources</h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          Industry knowledge, mineral guides, and expert insights from the GeoCore Minerals team.
+          Industry knowledge, mineral guides, and expert insights from the Mohsglobal Resourcesteam.
         </p>
       </div>
     </section>
