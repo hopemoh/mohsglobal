@@ -16,13 +16,13 @@ const About = () => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "GeoCore Minerals",
-    "description": "GeoCore Minerals is a premium mineral processing company specializing in limestone, dolomite, and lepidolite extraction. Established in 2000, we serve construction, agriculture, and industrial sectors globally.",
-    "url": "https://geocoreminerals.com/about",
+    "name": "Mohsglobal Resources",
+    "description": "Mohsglobal Resources is a premium mineral processing company specializing in limestone, dolomite, and lepidolite extraction. Established in 2000, we serve construction, agriculture, and industrial sectors globally.",
+    "url": "https://mohsglobal.site/about",
     "logo": "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1a0029db-a55b-49f4-b929-e023376c0e3f/id-preview-0d494291--78eb7ae8-738c-4ea0-82bc-61659bc871b9.lovable.app-1775154371803.png",
     "sameAs": [
-      "https://www.facebook.com/geocoreminerals",
-      "https://www.linkedin.com/company/geocoreminerals"
+      "https://www.facebook.com/",
+      "https://www.linkedin.com/company/"
     ],
     "foundingDate": "2000",
     "numberOfEmployees": "50-100"
@@ -32,19 +32,19 @@ const About = () => {
     <>
       <PageMeta 
         title="About Us"
-        description="Learn about GeoCore Minerals - a premium mineral supplier with over 25 years of experience in limestone, dolomite, and lepidolite processing. ISO certified, sustainable practices."
-        keywords="about GeoCore Minerals, mineral supplier, limestone processing, dolomite extraction, lepidolite supplier, mining company history"
+        description="Learn about Mohsglobal Resources - a premium mineral supplier with over 25 years of experience in limestone, dolomite, and lepidolite processing. ISO certified, sustainable practices."
+        keywords="about Mohsglobal Resources, mineral supplier, limestone processing, dolomite extraction, lepidolite supplier, mining company history"
         path="/about"
         schema={schema}
       />
     {/* Hero */}
     <section className="relative py-20 md:py-28">
       <div className="absolute inset-0">
-        <img src={heroImg} alt="GeoCore mining operations" width={1920} height={1080} className="w-full h-full object-cover" />
+        <img src={heroImg} alt="Mohsglobal Resources mining operations" width={1920} height={1080} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-earth-dark/80" />
       </div>
       <div className="container relative z-10 text-center">
-        <h1 className="text-4xl md:text-5xl font-heading font-bold text-primary-foreground mb-4">About GeoCore Minerals</h1>
+        <h1 className="text-4xl md:text-5xl font-heading font-bold text-primary-foreground mb-4">About Mohsglobal Resources</h1>
         <p className="text-primary-foreground/80 max-w-2xl mx-auto">
           Over two decades of excellence in mineral extraction, processing, and supply.
         </p>
@@ -62,7 +62,7 @@ const About = () => {
             </h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                Founded in 2000, GeoCore Minerals began as a small limestone quarry serving local construction projects. Over the years, through strategic expansion and relentless commitment to quality, we've grown into one of the region's most trusted mineral resource companies.
+                Mohsglobal Resources began as a small limestone quarry serving local construction projects. Over the years, through strategic expansion and relentless commitment to quality, we've grown into one of the region's most trusted mineral resource companies.
               </p>
               <p>
                 Today, we operate multiple quarries and state-of-the-art processing facilities, specializing in limestone, dolomite, and lepidolite. Our products serve industries ranging from construction and agriculture to advanced battery technology.
