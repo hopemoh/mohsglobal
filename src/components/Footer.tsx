@@ -8,8 +8,8 @@ const Footer = () => (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <img src={logo} alt="GeoCore Minerals" className="h-10 w-auto brightness-200" />
-            <span className="font-heading text-lg font-bold">GeoCore Minerals</span>
+            <img src={logo} alt="Mohsglobal Resources" className="h-10 w-auto brightness-200" />
+            <span className="font-heading text-lg font-bold">Mohsglobal Resources</span>
           </div>
           <p className="text-sm text-primary-foreground/70 leading-relaxed">
             Premium mineral processing solutions. Specializing in limestone, dolomite, and lepidolite extraction and processing.
@@ -50,7 +50,7 @@ const Footer = () => (
           <ul className="space-y-3 text-sm text-primary-foreground/70">
             <li className="flex items-start gap-2">
               <MapPin className="h-4 w-4 mt-0.5 shrink-0" />
-              123 Industrial Avenue, Mining District, MD 12345
+             KM 8 Freedom Industrial Way Ikpeshi, NG 32100
             </li>
             <li className="flex items-center gap-2">
               <Phone className="h-4 w-4 shrink-0" />
@@ -58,14 +58,14 @@ const Footer = () => (
             </li>
             <li className="flex items-center gap-2">
               <Mail className="h-4 w-4 shrink-0" />
-              info@geocoreminerals.com
+              info@mohsglobal.site
             </li>
           </ul>
         </div>
       </div>
 
       <div className="mt-10 pt-6 border-t border-primary-foreground/10 text-center text-xs text-primary-foreground/50">
-        © {new Date().getFullYear()} GeoCore Minerals. All rights reserved.
+        © {new Date().getFullYear()} Mohsglobal Resources. All rights reserved.
       </div>
     </div>
   </footer>
