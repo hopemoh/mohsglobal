@@ -57,7 +57,7 @@ const Blog = () => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    "name": Mohsglobal Resources Blog - Insights & Resources",
+   "name": "Mohsglobal Resources Blog - Insights & Resources",
     "description": "Industry knowledge, mineral guides, and expert insights about limestone, dolomite, lepidolite, and sustainable mining practices.",
     "url": "https://mohsglobal.site/blog",
     "publisher": {
