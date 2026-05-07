@@ -45,8 +45,8 @@ const Services = () => {
     "description": "Comprehensive mineral processing, bulk supply, logistics, and custom order services for limestone, dolomite, and lepidolite.",
     "provider": {
       "@type": "Organization",
-      "name": "GeoCore Minerals",
-      "url": "https://geocoreminerals.com"
+      "name": "Mohsglobal Resources",
+      "url": "https://mohsglobal.site"
     },
     "areaServed": "US",
     "hasOfferCatalog": {
@@ -65,7 +65,7 @@ const Services = () => {
     <>
       <PageMeta 
         title="Services"
-        description="GeoCore Minerals offers mineral processing, bulk supply, custom orders, quality testing, and flexible packaging solutions for limestone, dolomite, and lepidolite."
+        description="Mohsglobal Resources offers mineral processing, bulk supply, custom orders, quality testing, and flexible packaging solutions for limestone, dolomite, and lepidolite."
         keywords="mineral processing, bulk supply, custom mineral orders, quality testing, logistics, packaging solutions"
         path="/services"
         schema={schema}
