@@ -1,20 +1,16 @@
-# Sitemap
-Sitemap: https://geocoreminerals.com/sitemap.xml
+Sitemap: https://www.mohsglobal.site/sitemap.xml
 
 # Rules for all user agents
 User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /admin/login
-Crawl-delay: 1
-Request-rate: 1/1s
 
 # Specific rules for Google
 User-agent: Googlebot
 Allow: /
 Disallow: /admin
 Disallow: /admin/login
-Crawl-delay: 0
 
 # Specific rules for Bing
 User-agent: Bingbot
