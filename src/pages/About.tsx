@@ -17,7 +17,7 @@ const About = () => {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Mohsglobal Resources",
-    "description": "Mohsglobal Resources is a premium mineral processing company specializing in limestone, dolomite, and lepidolite extraction. Established in 2000, we serve construction, agriculture, and industrial sectors globally.",
+    "description": "Mohsglobal Resources is a premium mineral processing company specializing in limestone, dolomite, and lepidolite extraction. We serve construction, agriculture, and industrial sectors in Nigeria.",
     "url": "https://mohsglobal.site/about",
     "logo": "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1a0029db-a55b-49f4-b929-e023376c0e3f/id-preview-0d494291--78eb7ae8-738c-4ea0-82bc-61659bc871b9.lovable.app-1775154371803.png",
     "sameAs": [
@@ -32,7 +32,7 @@ const About = () => {
     <>
       <PageMeta 
         title="About Us"
-        description="Learn about Mohsglobal Resources - a premium mineral supplier with over 25 years of experience in limestone, dolomite, and lepidolite processing. ISO certified, sustainable practices."
+        description="Learn about Mohsglobal Resources - a premium mineral supplier with over 10 years of experience in limestone, dolomite, and lepidolite processing. ISO certified, sustainable practices."
         keywords="about Mohsglobal Resources, mineral supplier, limestone processing, dolomite extraction, lepidolite supplier, mining company history"
         path="/about"
         schema={schema}
@@ -46,7 +46,7 @@ const About = () => {
       <div className="container relative z-10 text-center">
         <h1 className="text-4xl md:text-5xl font-heading font-bold text-primary-foreground mb-4">About Mohsglobal Resources</h1>
         <p className="text-primary-foreground/80 max-w-2xl mx-auto">
-          Over two decades of excellence in mineral extraction, processing, and supply.
+          Over a decades of excellence in mineral extraction, processing, and supply.
         </p>
       </div>
     </section>
