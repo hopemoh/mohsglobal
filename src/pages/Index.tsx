@@ -33,19 +33,19 @@ const Index = () => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "GeoCore Minerals",
+    "name": "Mohsglobal Resources",
     "description": "Premium mineral processing solutions specializing in limestone, dolomite, and lepidolite extraction and processing.",
     "image": "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1a0029db-a55b-49f4-b929-e023376c0e3f/id-preview-0d494291--78eb7ae8-738c-4ea0-82bc-61659bc871b9.lovable.app-1775154371803.png",
-    "url": "https://geocoreminerals.com",
-    "telephone": "+1-234-567-890",
-    "email": "info@geocoreminerals.com",
+    "url": "https://mohsglobal.site",
+    "telephone": "+2348086448751",
+    "email": "info@mohsglobal.site",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "123 Industrial Avenue",
-      "addressLocality": "Mining District",
-      "addressRegion": "MD",
-      "postalCode": "12345",
-      "addressCountry": "US"
+      "streetAddress": "Km * freedom industrial Esate",
+      "addressLocality": "Ikpeshi",
+      "addressRegion": "NG",
+      "postalCode": "32100",
+      "addressCountry": "NG"
     },
     "openingHoursSpecification": [
       {
@@ -72,7 +72,7 @@ const Index = () => {
     <>
       <PageMeta 
         title="Home - Premium Limestone, Dolomite & Lepidolite Supplier"
-        description="GeoCore Minerals specializes in extraction and processing of limestone, dolomite, and lepidolite. Premium mineral supplier for construction, agriculture, and industrial applications since 2000."
+        description="Mohsglobal Resources  specializes in extraction and processing of limestone, dolomite, and lepidolite. Premium mineral supplier for construction, agriculture, and industrial applications since 2000."
         keywords="limestone supplier, dolomite processing, lepidolite supplier, mineral processing, bulk minerals, mining"
         path="/"
         schema={schema}
@@ -80,7 +80,7 @@ const Index = () => {
       {/* Hero */}
       <section className="relative min-h-[85vh] flex items-center">
         <div className="absolute inset-0">
-          <img src={hero?.image_url || heroImg} alt="GeoCore Minerals quarry operations" width={1920} height={1080} className="w-full h-full object-cover" />
+          <img src={hero?.image_url || heroImg} alt="Mohsglobal Resources quarry operations" width={1920} height={1080} className="w-full h-full object-cover" />
           <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, hsla(145,35%,28%,0.85), hsla(200,10%,15%,0.75))" }} />
         </div>
         <div className="container relative z-10 py-20">
@@ -160,7 +160,7 @@ const Index = () => {
               <p className="text-sm font-medium text-primary tracking-widest uppercase mb-2">Why Choose Us</p>
               <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-6">Decades of Excellence in Mineral Processing</h2>
               <p className="text-muted-foreground leading-relaxed mb-8">
-                With over 25 years in mineral extraction and processing, GeoCore Minerals delivers unmatched quality, reliability, and service to industries across the globe.
+                With over 25 years in mineral extraction and processing, Mohsglobal Resources delivers unmatched quality, reliability, and service to industries across the globe.
               </p>
               <div className="grid sm:grid-cols-2 gap-4">
                 {[
@@ -180,7 +180,7 @@ const Index = () => {
               </div>
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg">
-              <img src={processingImg} alt="GeoCore mineral processing plant" loading="lazy" width={1200} height={800} className="w-full h-full object-cover" />
+              <img src={processingImg} alt="Mohsglobal Resources processing plant" loading="lazy" width={1200} height={800} className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
