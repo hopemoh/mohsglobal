@@ -10,7 +10,7 @@ interface PageMetaProps {
   schema?: Record<string, any>;
 }
 
-const SITE_URL = 'https://geocoreminerals.com';
+const SITE_URL = 'https://mohsglobal.site';
 const DEFAULT_IMAGE = 'https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1a0029db-a55b-49f4-b929-e023376c0e3f/id-preview-0d494291--78eb7ae8-738c-4ea0-82bc-61659bc871b9.lovable.app-1775154371803.png';
 
 export const usePageMeta = ({ 
@@ -24,10 +24,10 @@ export const usePageMeta = ({
   const canonicalUrl = `${SITE_URL}${path}`;
   
   useEffect(() => {
-    document.title = `${title} | GeoCore Minerals`;
+    document.title = `${title} | Mohsglobal Resources`;
   }, [title]);
 
-  const helmetTitle = `${title} | GeoCore Minerals`;
+  const helmetTitle = `${title} | Mohsglobal Resources`;
 
   return {
     title: helmetTitle,
@@ -53,7 +53,7 @@ export const PageMeta = ({
   children
 }: HelmetMetaProps) => {
   const canonicalUrl = `${SITE_URL}${path}`;
-  const helmetTitle = `${title} | GeoCore Minerals`;
+  const helmetTitle = `${title} | Mohsglobal Resources`;
 
   const schemaStr = schema ? JSON.stringify(schema) : '';
 
@@ -70,7 +70,7 @@ export const PageMeta = ({
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
       <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:site_name" content="GeoCore Minerals" />
+      <meta property="og:site_name" content="Mohsglobal Resources" />
       
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={helmetTitle} />
