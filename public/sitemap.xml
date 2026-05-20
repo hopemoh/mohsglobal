@@ -3,7 +3,7 @@
 
   <!-- Home -->
   <url>
-    <loc>https://mohsglobal.site/</loc>
+    <loc>https://www.mohsglobal.site/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -11,7 +11,7 @@
 
   <!-- About -->
   <url>
-    <loc>https://mohsglobal.site/about</loc>
+    <loc>https://www.mohsglobal.site/about</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -19,7 +19,7 @@
 
   <!-- Products (Single Page) -->
   <url>
-    <loc>https://mohsglobal.site/products</loc>
+    <loc>https://www.mohsglobal.site/products</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
@@ -27,7 +27,7 @@
 
   <!-- Services -->
   <url>
-    <loc>https://mohsglobal.site/services</loc>
+    <loc>https://www.mohsglobal.site/services</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
@@ -35,7 +35,7 @@
 
   <!-- Contact -->
   <url>
-    <loc>https://mohsglobal.site/contact</loc>
+    <loc>https://www.mohsglobal.site/contact</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -43,7 +43,7 @@
 
   <!-- Blog -->
   <url>
-    <loc>https://mohsglobal.site/blog</loc>
+    <loc>https://www.mohsglobal.site/blog</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
