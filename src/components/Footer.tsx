@@ -23,39 +23,6 @@ const Footer = () => (
           <p className="text-sm text-primary-foreground/70 leading-relaxed">
             Premium mineral processing solutions. Specializing in limestone, dolomite, and lepidolite extraction and processing.
           </p>
-
-          {/* SOCIAL ICONS ADDED HERE */}
-          <div className="flex gap-4 mt-4 items-center">
-
-            {/* Facebook */}
-            <a
-              href="https://www.facebook.com/profile.php?id=61582779271950"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:opacity-80 transition"
-            >
-              <img
-                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg"
-                alt="Facebook"
-                className="w-5 h-5 invert"
-              />
-            </a>
-
-            {/* LinkedIn */}
-            <a
-              href="https://www.linkedin.com/company/69710289/"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:opacity-80 transition"
-            >
-              <img
-                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg"
-                alt="LinkedIn"
-                className="w-5 h-5 invert"
-              />
-            </a>
-
-          </div>
         </div>
 
         {/* Quick Links */}
@@ -63,6 +30,7 @@ const Footer = () => (
           <h3 className="font-heading text-base font-semibold mb-4">
             Quick Links
           </h3>
+
           <ul className="space-y-2">
             {[
               { to: "/about", label: "About Us" },
@@ -88,6 +56,7 @@ const Footer = () => (
           <h3 className="font-heading text-base font-semibold mb-4">
             Our Products
           </h3>
+
           <ul className="space-y-2 text-sm text-primary-foreground/70">
             <li>Limestone Powder & Lumps</li>
             <li>Dolomite Powder & Lumps</li>
@@ -96,13 +65,14 @@ const Footer = () => (
           </ul>
         </div>
 
-        {/* Contact */}
+        {/* Contact Info */}
         <div>
           <h3 className="font-heading text-base font-semibold mb-4">
             Contact Info
           </h3>
 
           <ul className="space-y-3 text-sm text-primary-foreground/70">
+
             <li className="flex items-start gap-2">
               <MapPin className="h-4 w-4 mt-0.5 shrink-0" />
               KM 8 Freedom Industrial Way Ikpeshi, NG 32100
@@ -117,8 +87,43 @@ const Footer = () => (
               <Mail className="h-4 w-4 shrink-0" />
               info@mohsglobal.site | mohsglobalresources@gmail.com
             </li>
+
+            {/* SOCIAL LINKS MOVED HERE */}
+            <li className="flex gap-4 pt-2 items-center">
+
+              {/* Facebook */}
+              <a
+                href="https://www.facebook.com/profile.php?id=61582779271950"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:opacity-80 transition"
+              >
+                <img
+                  src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg"
+                  alt="Facebook"
+                  className="w-5 h-5 invert"
+                />
+              </a>
+
+              {/* LinkedIn */}
+              <a
+                href="https://www.linkedin.com/company/69710289/"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:opacity-80 transition"
+              >
+                <img
+                  src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg"
+                  alt="LinkedIn"
+                  className="w-5 h-5 invert"
+                />
+              </a>
+
+            </li>
+
           </ul>
         </div>
+
       </div>
 
       {/* Bottom */}
