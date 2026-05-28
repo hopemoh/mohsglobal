@@ -1,14 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-
-import { Pencil, Trash2, Plus } from "lucide-react";
-
+import { Pencil, Trash2, Plus, GripVertical } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -16,17 +13,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-interface CrudField {
-  name: string;
-  label: string;
-  type: "text" | "textarea" | "number";
-  required?: boolean;
-}
-
 interface CrudConfig {
   table: string;
   title: string;
-  fields: CrudField[];
+  fields: { name: string; label: string; type: "text" | "textarea" | "number"; required?: boolean }[];
   sortable?: boolean;
 }
 
@@ -35,262 +25,164 @@ interface CmsRecord {
   [key: string]: unknown;
 }
 
-export default function CmsSection({
-  config,
-}: {
-  config: CrudConfig;
-}) {
+const CmsSection = ({ config }: { config: CrudConfig }) => {
   const [records, setRecords] = useState<CmsRecord[]>([]);
   const [loading, setLoading] = useState(true);
-  const [open, setOpen] = useState(false);
-  const [edit, setEdit] = useState<CmsRecord | null>(null);
-
+  const [editOpen, setEditOpen] = useState(false);
+  const [editRecord, setEditRecord] = useState<CmsRecord | null>(null);
   const { toast } = useToast();
 
-  // ---------------- FETCH ----------------
-  const fetchData = async () => {
-    try {
-      setLoading(true);
-
-      let query = supabase
-        .from(config.table)
-        .select("*");
-
-      // Safe ordering (only if column exists)
-      if (config.sortable) {
-        query = query.order("sort_order", { ascending: true, nullsFirst: true });
-      }
-
-      const { data, error } = await query;
-
-      if (error) {
-        toast({
-          title: "Error loading data",
-          description: error.message,
-          variant: "destructive",
-        });
-        setRecords([]);
-        return;
-      }
-
-      setRecords((data as CmsRecord[]) || []);
-    } catch (err) {
-      toast({
-        title: "Unexpected error",
-        description: "Failed to load data",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
+  const fetchRecords = async () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let query = (supabase.from as any)(config.table).select("*");
+    if (config.sortable) {
+      query = query.order("sort_order", { ascending: true });
+    } else {
+      query = query.order("created_at", { ascending: false });
     }
+    const { data, error } = await query;
+    if (error) {
+      toast({ title: "Error", description: error.message, variant: "destructive" });
+    } else {
+      setRecords((data as CmsRecord[]) || []);
+    }
+    setLoading(false);
   };
 
-  useEffect(() => {
-    fetchData();
-  }, [config.table]);
+  useEffect(() => { fetchRecords(); }, []);
 
-  // ---------------- SAVE ----------------
   const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const formData = new FormData(e.currentTarget);
-
     const values: Record<string, unknown> = {};
-
     config.fields.forEach((f) => {
       const val = formData.get(f.name);
-
-      values[f.name] =
-        f.type === "number" ? Number(val) : val;
+      values[f.name] = f.type === "number" ? Number(val) : val;
     });
 
-    try {
-      // UPDATE
-      if (edit?.id) {
-        const { error } = await supabase
-          .from(config.table)
-          .update(values)
-          .eq("id", edit.id);
-
-        if (error) throw error;
-
-        toast({ title: "Updated successfully" });
-      } 
-      // CREATE
-      else {
-        if (config.sortable) {
-          values.sort_order = records.length;
-        }
-
-        const { error } = await supabase
-          .from(config.table)
-          .insert(values);
-
-        if (error) throw error;
-
-        toast({ title: "Created successfully" });
+    if (editRecord?.id) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { error } = await (supabase.from as any)(config.table).update(values).eq("id", editRecord.id);
+      if (error) {
+        toast({ title: "Error", description: error.message, variant: "destructive" });
+        return;
       }
-
-      setOpen(false);
-      setEdit(null);
-      fetchData();
-    } catch (err: any) {
-      toast({
-        title: "Save failed",
-        description: err.message,
-        variant: "destructive",
-      });
+    } else {
+      if (config.sortable) {
+        values.sort_order = records.length;
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { error } = await (supabase.from as any)(config.table).insert(values);
+      if (error) {
+        toast({ title: "Error", description: error.message, variant: "destructive" });
+        return;
+      }
     }
+    toast({ title: "Saved!" });
+    setEditOpen(false);
+    setEditRecord(null);
+    fetchRecords();
   };
 
-  // ---------------- DELETE ----------------
   const handleDelete = async (id: string) => {
-    if (!confirm("Delete this item?")) return;
-
-    try {
-      const { error } = await supabase
-        .from(config.table)
-        .delete()
-        .eq("id", id);
-
-      if (error) throw error;
-
-      toast({ title: "Deleted" });
-      fetchData();
-    } catch (err: any) {
-      toast({
-        title: "Delete failed",
-        description: err.message,
-        variant: "destructive",
-      });
+    if (!confirm("Are you sure you want to delete this?")) return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { error } = await (supabase.from as any)(config.table).delete().eq("id", id);
+    if (error) {
+      toast({ title: "Error", description: error.message, variant: "destructive" });
+    } else {
+      toast({ title: "Deleted!" });
+      fetchRecords();
     }
   };
 
   const openCreate = () => {
-    setEdit(null);
-    setOpen(true);
+    setEditRecord(null);
+    setEditOpen(true);
   };
 
   const openEdit = (record: CmsRecord) => {
-    setEdit(record);
-    setOpen(true);
+    setEditRecord(record);
+    setEditOpen(true);
   };
 
-  // ---------------- UI ----------------
-  if (loading) {
-    return (
-      <div className="p-4 text-sm text-muted-foreground">
-        Loading...
-      </div>
-    );
-  }
+  if (loading) return <div className="text-muted-foreground text-sm">Loading...</div>;
 
   return (
     <div className="space-y-4">
-
-      {/* HEADER */}
-      <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold">
-          {config.title}
-        </h2>
-
-        <Button size="sm" onClick={openCreate}>
-          <Plus className="w-4 h-4 mr-1" />
-          Add
+      <div className="flex items-center justify-between">
+        <h2 className="font-heading text-xl font-semibold text-foreground">{config.title}</h2>
+        <Button onClick={openCreate} size="sm">
+          <Plus className="h-4 w-4 mr-1" /> Add
         </Button>
       </div>
 
-      {/* LIST */}
-      <div className="space-y-2">
-        {records.map((r) => (
-          <div
-            key={r.id}
-            className="flex justify-between items-center border p-3 rounded"
-          >
-            <div className="min-w-0">
-              <p className="font-medium truncate">
-                {String(
-                  r[config.fields[0]?.name] || "Untitled"
-                )}
-              </p>
-
-              {config.fields[1] && (
-                <p className="text-sm text-muted-foreground truncate">
-                  {String(
-                    r[config.fields[1].name] || ""
-                  )}
+      {records.length === 0 ? (
+        <p className="text-sm text-muted-foreground">No records yet. Click "Add" to create one.</p>
+      ) : (
+        <div className="space-y-2">
+          {records.map((record) => (
+            <div key={record.id} className="flex items-center gap-3 p-3 bg-card border border-border rounded-lg">
+              {config.sortable && <GripVertical className="h-4 w-4 text-muted-foreground shrink-0" />}
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-foreground truncate">
+                  {String(record[config.fields[0].name] || "Untitled")}
                 </p>
-              )}
+                {config.fields[1] && (
+                  <p className="text-xs text-muted-foreground truncate">
+                    {String(record[config.fields[1].name] || "")}
+                  </p>
+                )}
+              </div>
+              <div className="flex gap-1 shrink-0">
+                <Button variant="ghost" size="icon" onClick={() => openEdit(record)}>
+                  <Pencil className="h-4 w-4" />
+                </Button>
+                <Button variant="ghost" size="icon" onClick={() => handleDelete(record.id)}>
+                  <Trash2 className="h-4 w-4 text-destructive" />
+                </Button>
+              </div>
             </div>
+          ))}
+        </div>
+      )}
 
-            <div className="flex gap-2">
-              <Button
-                size="icon"
-                variant="outline"
-                onClick={() => openEdit(r)}
-              >
-                <Pencil className="w-4 h-4" />
-              </Button>
-
-              <Button
-                size="icon"
-                variant="destructive"
-                onClick={() => handleDelete(r.id)}
-              >
-                <Trash2 className="w-4 h-4" />
-              </Button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* MODAL */}
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-lg">
+      <Dialog open={editOpen} onOpenChange={setEditOpen}>
+        <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>
-              {edit ? "Edit" : "Create"} {config.title}
-            </DialogTitle>
+            <DialogTitle>{editRecord ? "Edit" : "Add"} {config.title}</DialogTitle>
           </DialogHeader>
-
-          <form onSubmit={handleSave} className="space-y-4">
-            {config.fields.map((f) => (
-              <div key={f.name} className="space-y-1">
-                <Label>
-                  {f.label} {f.required ? "*" : ""}
-                </Label>
-
-                {f.type === "textarea" ? (
+          <form onSubmit={handleSave} className="space-y-4 pt-2">
+            {config.fields.map((field) => (
+              <div key={field.name} className="space-y-2">
+                <Label htmlFor={`field-${field.name}`}>{field.label} {field.required && "*"}</Label>
+                {field.type === "textarea" ? (
                   <Textarea
-                    name={f.name}
-                    required={f.required}
-                    defaultValue={
-                      edit
-                        ? String(edit[f.name] || "")
-                        : ""
-                    }
+                    id={`field-${field.name}`}
+                    name={field.name}
+                    required={field.required}
+                    defaultValue={editRecord ? String(editRecord[field.name] || "") : ""}
+                    rows={4}
                   />
                 ) : (
                   <Input
-                    name={f.name}
-                    type={f.type}
-                    required={f.required}
-                    defaultValue={
-                      edit
-                        ? String(edit[f.name] || "")
-                        : ""
-                    }
+                    id={`field-${field.name}`}
+                    name={field.name}
+                    type={field.type}
+                    required={field.required}
+                    defaultValue={editRecord ? String(editRecord[field.name] || "") : ""}
                   />
                 )}
               </div>
             ))}
-
             <Button type="submit" className="w-full">
-              {edit ? "Update" : "Create"}
+              {editRecord ? "Update" : "Create"}
             </Button>
           </form>
         </DialogContent>
       </Dialog>
     </div>
   );
-}
+};
+
+export default CmsSection;
