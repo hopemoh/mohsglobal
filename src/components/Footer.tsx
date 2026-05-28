@@ -85,7 +85,9 @@ const Footer = () => (
 
             <li className="flex items-center gap-2">
               <Mail className="h-4 w-4 shrink-0" />
-              info@mohsglobal.site | mohsglobalresources@gmail.com
+              info@mohsglobal.site 
+              sales@mohsglobal.site 
+              mohsglobalresources@gmail.com
             </li>
 
             {/* SOCIAL LINKS MOVED HERE */}
