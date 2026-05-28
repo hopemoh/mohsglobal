@@ -1,20 +1,13 @@
-```tsx
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-
 import { useToast } from "@/hooks/use-toast";
 
-import {
-  Pencil,
-  Trash2,
-  Plus,
-  GripVertical,
-} from "lucide-react";
+import { Pencil, Trash2, Plus } from "lucide-react";
 
 import {
   Dialog,
@@ -39,30 +32,23 @@ interface CrudConfig {
 
 interface CmsRecord {
   id: string;
-  created_at?: string;
-  sort_order?: number;
   [key: string]: unknown;
 }
 
-const CmsSection = ({
+export default function CmsSection({
   config,
 }: {
   config: CrudConfig;
-}) => {
+}) {
   const [records, setRecords] = useState<CmsRecord[]>([]);
   const [loading, setLoading] = useState(true);
-
-  const [editOpen, setEditOpen] = useState(false);
-
-  const [editRecord, setEditRecord] =
-    useState<CmsRecord | null>(null);
+  const [open, setOpen] = useState(false);
+  const [edit, setEdit] = useState<CmsRecord | null>(null);
 
   const { toast } = useToast();
 
-  // =========================
-  // FETCH RECORDS
-  // =========================
-  const fetchRecords = async () => {
+  // ---------------- FETCH ----------------
+  const fetchData = async () => {
     try {
       setLoading(true);
 
@@ -70,34 +56,28 @@ const CmsSection = ({
         .from(config.table)
         .select("*");
 
-      // Optional sorting
+      // Safe ordering (only if column exists)
       if (config.sortable) {
-        query = query.order("sort_order", {
-          ascending: true,
-        });
+        query = query.order("sort_order", { ascending: true, nullsFirst: true });
       }
 
       const { data, error } = await query;
 
       if (error) {
-        console.error(error);
-
         toast({
-          title: "Database Error",
+          title: "Error loading data",
           description: error.message,
           variant: "destructive",
         });
-
         setRecords([]);
-      } else {
-        setRecords((data as CmsRecord[]) || []);
+        return;
       }
-    } catch (err) {
-      console.error(err);
 
+      setRecords((data as CmsRecord[]) || []);
+    } catch (err) {
       toast({
-        title: "Unexpected Error",
-        description: "Something went wrong",
+        title: "Unexpected error",
+        description: "Failed to load data",
         variant: "destructive",
       });
     } finally {
@@ -105,59 +85,37 @@ const CmsSection = ({
     }
   };
 
-  // =========================
-  // INITIAL LOAD
-  // =========================
   useEffect(() => {
-    fetchRecords();
+    fetchData();
   }, [config.table]);
 
-  // =========================
-  // SAVE RECORD
-  // =========================
-  const handleSave = async (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
+  // ---------------- SAVE ----------------
+  const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const formData = new FormData(e.currentTarget);
+
+    const values: Record<string, unknown> = {};
+
+    config.fields.forEach((f) => {
+      const val = formData.get(f.name);
+
+      values[f.name] =
+        f.type === "number" ? Number(val) : val;
+    });
+
     try {
-      const formData = new FormData(
-        e.currentTarget
-      );
-
-      const values: Record<string, unknown> = {};
-
-      config.fields.forEach((field) => {
-        const val = formData.get(field.name);
-
-        values[field.name] =
-          field.type === "number"
-            ? Number(val)
-            : val;
-      });
-
       // UPDATE
-      if (editRecord?.id) {
+      if (edit?.id) {
         const { error } = await supabase
           .from(config.table)
           .update(values)
-          .eq("id", editRecord.id);
+          .eq("id", edit.id);
 
-        if (error) {
-          toast({
-            title: "Update Failed",
-            description: error.message,
-            variant: "destructive",
-          });
+        if (error) throw error;
 
-          return;
-        }
-
-        toast({
-          title: "Updated Successfully",
-        });
-      }
-
+        toast({ title: "Updated successfully" });
+      } 
       // CREATE
       else {
         if (config.sortable) {
@@ -168,47 +126,26 @@ const CmsSection = ({
           .from(config.table)
           .insert(values);
 
-        if (error) {
-          toast({
-            title: "Create Failed",
-            description: error.message,
-            variant: "destructive",
-          });
+        if (error) throw error;
 
-          return;
-        }
-
-        toast({
-          title: "Created Successfully",
-        });
+        toast({ title: "Created successfully" });
       }
 
-      setEditOpen(false);
-      setEditRecord(null);
-
-      fetchRecords();
-    } catch (err) {
-      console.error(err);
-
+      setOpen(false);
+      setEdit(null);
+      fetchData();
+    } catch (err: any) {
       toast({
-        title: "Unexpected Error",
-        description: "Something went wrong",
+        title: "Save failed",
+        description: err.message,
         variant: "destructive",
       });
     }
   };
 
-  // =========================
-  // DELETE RECORD
-  // =========================
-  const handleDelete = async (
-    id: string
-  ) => {
-    const confirmed = confirm(
-      "Are you sure you want to delete this?"
-    );
-
-    if (!confirmed) return;
+  // ---------------- DELETE ----------------
+  const handleDelete = async (id: string) => {
+    if (!confirm("Delete this item?")) return;
 
     try {
       const { error } = await supabase
@@ -216,231 +153,131 @@ const CmsSection = ({
         .delete()
         .eq("id", id);
 
-      if (error) {
-        toast({
-          title: "Delete Failed",
-          description: error.message,
-          variant: "destructive",
-        });
+      if (error) throw error;
 
-        return;
-      }
-
+      toast({ title: "Deleted" });
+      fetchData();
+    } catch (err: any) {
       toast({
-        title: "Deleted Successfully",
-      });
-
-      fetchRecords();
-    } catch (err) {
-      console.error(err);
-
-      toast({
-        title: "Unexpected Error",
-        description: "Something went wrong",
+        title: "Delete failed",
+        description: err.message,
         variant: "destructive",
       });
     }
   };
 
-  // =========================
-  // OPEN CREATE
-  // =========================
   const openCreate = () => {
-    setEditRecord(null);
-    setEditOpen(true);
+    setEdit(null);
+    setOpen(true);
   };
 
-  // =========================
-  // OPEN EDIT
-  // =========================
-  const openEdit = (
-    record: CmsRecord
-  ) => {
-    setEditRecord(record);
-    setEditOpen(true);
+  const openEdit = (record: CmsRecord) => {
+    setEdit(record);
+    setOpen(true);
   };
 
-  // =========================
-  // LOADING UI
-  // =========================
+  // ---------------- UI ----------------
   if (loading) {
     return (
-      <div className="p-6 text-sm text-muted-foreground">
-        Loading CMS data...
+      <div className="p-4 text-sm text-muted-foreground">
+        Loading...
       </div>
     );
   }
 
-  // =========================
-  // UI
-  // =========================
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
 
       {/* HEADER */}
-      <div className="flex items-center justify-between">
+      <div className="flex justify-between items-center">
         <h2 className="text-xl font-semibold">
           {config.title}
         </h2>
 
-        <Button
-          onClick={openCreate}
-          size="sm"
-        >
-          <Plus className="mr-1 h-4 w-4" />
+        <Button size="sm" onClick={openCreate}>
+          <Plus className="w-4 h-4 mr-1" />
           Add
         </Button>
       </div>
 
-      {/* EMPTY STATE */}
-      {records.length === 0 ? (
-        <div className="rounded-lg border p-6 text-sm text-muted-foreground">
-          No records found.
-        </div>
-      ) : (
+      {/* LIST */}
+      <div className="space-y-2">
+        {records.map((r) => (
+          <div
+            key={r.id}
+            className="flex justify-between items-center border p-3 rounded"
+          >
+            <div className="min-w-0">
+              <p className="font-medium truncate">
+                {String(
+                  r[config.fields[0]?.name] || "Untitled"
+                )}
+              </p>
 
-        /* RECORD LIST */
-        <div className="space-y-3">
-          {records.map((record) => (
-            <div
-              key={record.id}
-              className="flex items-center gap-3 rounded-lg border bg-card p-4"
-            >
-
-              {/* SORT ICON */}
-              {config.sortable && (
-                <GripVertical className="h-4 w-4 text-muted-foreground" />
-              )}
-
-              {/* CONTENT */}
-              <div className="min-w-0 flex-1">
-
-                {/* TITLE */}
-                <p className="truncate font-medium">
+              {config.fields[1] && (
+                <p className="text-sm text-muted-foreground truncate">
                   {String(
-                    record[
-                      config.fields[0].name
-                    ] || "Untitled"
+                    r[config.fields[1].name] || ""
                   )}
                 </p>
-
-                {/* SUBTITLE */}
-                {config.fields[1] && (
-                  <p className="truncate text-sm text-muted-foreground">
-                    {String(
-                      record[
-                        config.fields[1].name
-                      ] || ""
-                    )}
-                  </p>
-                )}
-              </div>
-
-              {/* ACTIONS */}
-              <div className="flex gap-2">
-
-                {/* EDIT */}
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() =>
-                    openEdit(record)
-                  }
-                >
-                  <Pencil className="h-4 w-4" />
-                </Button>
-
-                {/* DELETE */}
-                <Button
-                  variant="destructive"
-                  size="icon"
-                  onClick={() =>
-                    handleDelete(record.id)
-                  }
-                >
-                  <Trash2 className="h-4 w-4" />
-                </Button>
-
-              </div>
+              )}
             </div>
-          ))}
-        </div>
-      )}
+
+            <div className="flex gap-2">
+              <Button
+                size="icon"
+                variant="outline"
+                onClick={() => openEdit(r)}
+              >
+                <Pencil className="w-4 h-4" />
+              </Button>
+
+              <Button
+                size="icon"
+                variant="destructive"
+                onClick={() => handleDelete(r.id)}
+              >
+                <Trash2 className="w-4 h-4" />
+              </Button>
+            </div>
+          </div>
+        ))}
+      </div>
 
       {/* MODAL */}
-      <Dialog
-        open={editOpen}
-        onOpenChange={setEditOpen}
-      >
-        <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-lg">
-
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-lg">
           <DialogHeader>
             <DialogTitle>
-              {editRecord
-                ? "Edit"
-                : "Add"}{" "}
-              {config.title}
+              {edit ? "Edit" : "Create"} {config.title}
             </DialogTitle>
           </DialogHeader>
 
-          {/* FORM */}
-          <form
-            onSubmit={handleSave}
-            className="space-y-4 pt-2"
-          >
-
-            {config.fields.map((field) => (
-              <div
-                key={field.name}
-                className="space-y-2"
-              >
-
-                <Label
-                  htmlFor={`field-${field.name}`}
-                >
-                  {field.label}
-
-                  {field.required && (
-                    <span className="ml-1 text-red-500">
-                      *
-                    </span>
-                  )}
+          <form onSubmit={handleSave} className="space-y-4">
+            {config.fields.map((f) => (
+              <div key={f.name} className="space-y-1">
+                <Label>
+                  {f.label} {f.required ? "*" : ""}
                 </Label>
 
-                {field.type ===
-                "textarea" ? (
+                {f.type === "textarea" ? (
                   <Textarea
-                    id={`field-${field.name}`}
-                    name={field.name}
-                    required={
-                      field.required
-                    }
-                    rows={5}
+                    name={f.name}
+                    required={f.required}
                     defaultValue={
-                      editRecord
-                        ? String(
-                            editRecord[
-                              field.name
-                            ] || ""
-                          )
+                      edit
+                        ? String(edit[f.name] || "")
                         : ""
                     }
                   />
                 ) : (
                   <Input
-                    id={`field-${field.name}`}
-                    name={field.name}
-                    type={field.type}
-                    required={
-                      field.required
-                    }
+                    name={f.name}
+                    type={f.type}
+                    required={f.required}
                     defaultValue={
-                      editRecord
-                        ? String(
-                            editRecord[
-                              field.name
-                            ] || ""
-                          )
+                      edit
+                        ? String(edit[f.name] || "")
                         : ""
                     }
                   />
@@ -448,22 +285,12 @@ const CmsSection = ({
               </div>
             ))}
 
-            {/* SUBMIT */}
-            <Button
-              type="submit"
-              className="w-full"
-            >
-              {editRecord
-                ? "Update"
-                : "Create"}
+            <Button type="submit" className="w-full">
+              {edit ? "Update" : "Create"}
             </Button>
-
           </form>
         </DialogContent>
       </Dialog>
     </div>
   );
-};
-
-export default CmsSection;
-```
+}
