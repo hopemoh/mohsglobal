@@ -15,12 +15,13 @@ const Contact = () => {
     "@type": "ContactPage",
     "name": "Contact Mohsglobal Resources",
     "description": "Get in touch with Mohsglobal Resources for quotes, product inquiries, and mineral supply needs.",
-    "url": "https://mohsglobal.site/contact",
+    "url": "https://www.mohsglobal.site/contact",
     "mainEntity": {
       "@type": "LocalBusiness",
       "name": "Mohsglobal Resources",
       "telephone": "+2348086448751",
-      "email": "inquiry@mohsglobal.site",
+      "email": "info@mohsglobal.site",
+      "email": "sales@mohsglobal.site",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Km 8 freedom industrial way,",
