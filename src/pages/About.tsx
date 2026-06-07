@@ -18,8 +18,8 @@ const About = () => {
     "@type": "Organization",
     "name": "Mohsglobal Resources",
     "description": "Mohsglobal Resources is a premium mineral processing company specializing in limestone, dolomite, and lepidolite extraction. We serve construction, agriculture, and industrial sectors in Nigeria.",
-    "url": "https://mohsglobal.site/about",
-    "logo": "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1a0029db-a55b-49f4-b929-e023376c0e3f/id-preview-0d494291--78eb7ae8-738c-4ea0-82bc-61659bc871b9.lovable.app-1775154371803.png",
+    "url": "https://www.mohsglobal.site/about",
+    //"logo": "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1a0029db-a55b-49f4-b929-e023376c0e3f/id-preview-0d494291--78eb7ae8-738c-4ea0-82bc-61659bc871b9.lovable.app-1775154371803.png",
     "sameAs": [
       "https://www.facebook.com/",
       "https://www.linkedin.com/company/"
