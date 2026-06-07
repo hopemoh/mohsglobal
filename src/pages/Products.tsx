@@ -63,7 +63,7 @@ const Products = () => {
     "@type": "CollectionPage",
     "name": "Our Products - Mohsglobal Resources",
     "description": "Browse our premium mineral products including limestone, dolomite, and lepidolite. All available in multiple forms and custom specifications.",
-    "url": "https://nohsglobal.site/products",
+    "url": "https://www.mohsglobal.site/products",
     "mainEntity": {
       "@type": "ItemList",
       "itemListElement": products.map((p, idx) => ({
@@ -82,7 +82,7 @@ const Products = () => {
       <PageMeta 
         title="Products"
         description="Mohsglobal Resources offers premium limestone, dolomite, and lepidolite products. High-purity minerals in powder and lump forms with custom specifications available."
-        keywords="limestone powder, dolomite supplier, lepidolite powder, mineral products, bulk minerals, industrial minerals"
+        keywords="limestone powder, dolomite supplier, lepidolite powder, mineral products, bulk minerals, industrial minerals, limestone supplier, limestone"
         path="/products"
         schema={schema}
       />
