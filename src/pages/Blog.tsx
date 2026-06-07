@@ -63,7 +63,7 @@ const Blog = () => {
     "publisher": {
       "@type": "Organization",
       "name": "Mohsglobal Resources",
-      "url": "https://Mohsglobal.site"
+      
     }
   };
 
