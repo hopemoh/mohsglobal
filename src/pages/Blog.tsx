@@ -59,7 +59,7 @@ const Blog = () => {
     "@type": "Blog",
    "name": "Mohsglobal Resources Blog - Insights & Resources",
     "description": "Industry knowledge, mineral guides, and expert insights about limestone, dolomite, lepidolite, and sustainable mining practices.",
-    "url": "https://mohsglobal.site/blog",
+    "url": "https://www.mohsglobal.site/blog",
     "publisher": {
       "@type": "Organization",
       "name": "Mohsglobal Resources",
