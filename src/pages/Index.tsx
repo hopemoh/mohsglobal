@@ -35,8 +35,8 @@ const Index = () => {
     "@type": "LocalBusiness",
     "name": "Mohsglobal Resources",
     "description": "Premium mineral processing solutions specializing in limestone, dolomite, and lepidolite extraction and processing.",
-    "image": "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1a0029db-a55b-49f4-b929-e023376c0e3f/id-preview-0d494291--78eb7ae8-738c-4ea0-82bc-61659bc871b9.lovable.app-1775154371803.png",
-    "url": "https://mohsglobal.site",
+    //"image": "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1a0029db-a55b-49f4-b929-e023376c0e3f/id-preview-0d494291--78eb7ae8-738c-4ea0-82bc-61659bc871b9.lovable.app-1775154371803.png",
+    "url": "https://www.mohsglobal.site",
     "telephone": "+2348086448751",
     "email": "info@mohsglobal.site",
     "address": {
@@ -86,7 +86,7 @@ const Index = () => {
         <div className="container relative z-10 py-20">
           <div className="max-w-2xl animate-fade-in-up">
             <p className="text-primary-foreground/80 text-sm font-medium tracking-widest uppercase mb-4">
-              Trusted Since 2000
+              Trusted Since 2019
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary-foreground leading-tight mb-6">
               {hero?.headline || "Premium Mineral Processing Solutions"}
