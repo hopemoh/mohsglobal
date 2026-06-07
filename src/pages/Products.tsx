@@ -71,7 +71,7 @@ const Products = () => {
         "position": idx + 1,
         "name": p.name,
         "description": p.desc,
-        "url": `https://mohsglobal.site/products#${p.slug}`,
+        "url": `https://www.mohsglobal.site/products#${p.slug}`,
         "image": p.img,
       }))
     }
