@@ -46,7 +46,7 @@ const Services = () => {
     "provider": {
       "@type": "Organization",
       "name": "Mohsglobal Resources",
-      "url": "https://mohsglobal.site"
+      "url": "https://www.mohsglobal.site"
     },
     "areaServed": "US",
     "hasOfferCatalog": {
